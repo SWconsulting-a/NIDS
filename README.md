@@ -47,3 +47,10 @@ Entraînement des modèles de machine learning. <br>
 </ul>
 <h3>2-4-Sauvegarde du meilleur modèle de prédiction et utilisation en temps réel</h3>
 Pour ce projet, le modèle Xgboost offre la meilleure prédiction sur le jeu de données.
+<h3>Références</h3>
+<ul>
+  <li>http://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html</li>
+  <li>https://www.unb.ca/cic/datasets/ids-2017.html</li>
+  <li>https://research.unsw.edu.au/projects/unsw-nb15-dataset</li>
+
+</ul>
