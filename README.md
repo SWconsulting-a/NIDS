@@ -1,7 +1,7 @@
 <h1>Système de détection des intrusions</h1>
 La détection des intrusions réseau et l'utilisation d'un modèle de classification binaire pour distinguer le trafic malveillant du trafic bénin offrent des avantages cruciaux pour les entreprises en matière de cybersécurité.<br>
 L'objectif de ce projet est de développer un système de classification binaire capable de détecter le trafic réseau malveillant ou bénin en analysant les données importantes telles que le protocole de communication, la durée, les ports de source et destination,etc.
-<h2>Etape 1: extraction, chargement et transformation des données au niveau de AWS </h2>
+<h2>Etape 1: extraction, chargement et transformation des données sur AWS </h2>
 Tout d'abord, on commence par l'acquisition des données depuis plusieurs sources: logs, datasets:
 <ul>
   <li>CICIDS 2018 </li>
