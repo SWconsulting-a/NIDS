@@ -7,8 +7,8 @@ Tout d'abord, on commence par l'acquisition des données depuis plusieurs source
   <li>CICIDS 2018 </li>
   <li>KDD CUP 1999</li>
   <li>UNSW-NB 15</li>
+  <li>D'autres datasets des données du traffic réseau + logs</li>
 </ul>
--D'autres datasets des données du traffic réseau + logs.<br>
 Les données sont stockées au niveau du système de gestion des fichiers S3.<br>
 Ensuite, on procède au traitement des données au niveau du datawarehouse Redshift afin de centraliser les données et créer le dataset final prêt à l'apprentissage.
 <h2>Etape 2: Apprentissage des modèles de classification binaire et évaluation</h2>
