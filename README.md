@@ -9,10 +9,12 @@ Tout d'abord, on commence par l'extraction des données depuis plusieurs sources
   <li>UNSW-NB 15</li>
   <li>D'autres datasets des données du traffic réseau + logs</li>
 </ul>
+<div>
+
 Les données sont stockées au niveau du système de gestion des fichiers S3 au niveau de l'infrastructure cloud de AWS.<br>
 Ensuite, on procède au traitement des données au niveau du datawarehouse Redshift afin de centraliser les données et créer le dataset final qui va servir à l'apprentissage.
-Au final, on obtient un jeu de données balancé avec deux types de trafic: (0: bénin) et (1: malveillant), ceci va permettre au modèle de bien apprendre à classifier les deux classes et de réduire le biais et le sur-apprentissage qui pourrait conduire à de fausses prédictions.<br>
-
+Au final, on obtient un jeu de données balancé avec deux types de trafic: (0: bénin) et (1: malveillant), ceci va permettre au modèle de bien apprendre à classifier les deux classes et de réduire le biais et le sur-apprentissage qui pourrait conduire à de fausses prédictions. <br>
+</div>
 
 <img src="images/balanced_dataset.PNG" width="512"/>
 
@@ -54,8 +56,11 @@ Dans cette étape, on utilise le langage python pour entraîner les modèles de 
   <li>Courbe ROC (évaluer le compromis entre le rappel et le taux de faux positifs)</li>
 </ol>
 <h3>2-4-Choix du meilleur modèle de prédiction</h3>
+<div>
 Nous allons comparé le précision de chaque modèle de classification afin de choisir le meilleur classifier.<br>
-
+  
+</div>
+<br>
 <img src="images/compare_models_acc.PNG" width="900"/>
 
 On remarque que le modèle Xgboost offre la meilleure prédiction sur le jeu de données.<br>
@@ -112,9 +117,10 @@ Plus globalement, la distribution des probabilités de prédiction du modèle po
 <img src="images/confiance_globale.PNG" width="512"/>
 
 <h4>2-5-5-Temps d'exécution du modèle en fonction du nombre des échantillons</h4>
-Afin de garantir une meilleure performance du modèle, on va calculer son temps d'exécution en fonction du nombre des échantillons. Ceci, dans l'objectif de pouvoir déployer le modèle dans un système de détection d'intrusion en temps réel et dans les systèmes de monitoring du traffic réseau.<br>
+<div>Afin de garantir une meilleure performance du modèle, on va calculer son temps d'exécution en fonction du nombre des échantillons. Ceci, dans l'objectif de pouvoir déployer le modèle dans un système de détection d'intrusion en temps réel et dans les systèmes de monitoring du traffic réseau.<br>
 Le modèle présente un temps d'exécution très réduit, permettant ainsi une utilisation efficace pour des détections en temps réel sur des flux de données de streaming ou en mode batch.<br>
-
+</div>
+<br>
 <img src="images/temps_execution.PNG" width="512"/>
 <h3>Références</h3>
 
