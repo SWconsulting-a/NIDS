@@ -46,8 +46,33 @@ Entraînement des modèles de machine learning. <br>
   <li>Courbe ROC (évaluer le compromis entre le rappel et le taux de faux positifs)</li>
 </ul>
 <h3>2-4-Sauvegarde du meilleur modèle de prédiction et utilisation en temps réel</h3>
-Pour ce projet, le modèle Xgboost offre la meilleure prédiction sur le jeu de données.
+Pour ce projet, le modèle Xgboost offre la meilleure prédiction sur le jeu de données.<br>
+Dans ce qui suit, nous allons évaluer les performances du modèle choisi sur le jeu de données de validation sous forme de modélisation graphique.<br>
+Nous commençons par le calcul de la matrice de confusion qui va nous permettre de mesurer l'exactitude, précision et confiance du modèle à bien classifier le traffic et prédire la classe correspondante au traffic réseau. <br>
+Pour clarifier les idées au niveau de ces mesures, nous introduisons certains termes ici :
+<ul>
+  <li>True Positive (TP) : ce sont les observations positives qui ont été prédites correctement par le modèle (ou pour simplifier, les observations prédites comme étant “oui” et étant véritablement “oui”).</li>
+  <li>True Negative (TN) : de manière similaire, ce sont les observations négatives correctement prédites par le modèle (les observations prédites comme “non” et étant réellement “non”).</li>
+<li>False Positive (FP) : ce sont les observations négatives prédites (de manière erronée) par le modèle comme étant positives (un vrai “non” prédit comme un “oui”).</li>
+  <li>False Negative (TN) : ce sont les observations positives prédites comme étant négatives par le modèle (un vrai “oui” prédit comme un “non”).</li>
+</ul>
+
+L’accuracy, qui est la mesure de performance d’un modèle la plus intuitive, peut être définie à partir de ces termes : il s’agit tout simplement du ratio des observations correctes prédites sur le total des observations.<br>
+Soit : accuracy = (TP+TN)/(TP+TN+FP+FN). <br>
+C’est une métrique très efficace dans le cas de dataset équilibré.
+Pour notre projet: l'accuracy est égale à 0.97
+
+Le diagramme en barres représente la répartition des classes prédites par le modèle sur le jeu de données de validation, on remarque que les classes sont presque égales et qu'il arrive à bien classifier le traffic normal et le distinguer des attaques.<br>
+<img src="images/predictions_barplot.PNG" width="512"/><br>
+De même, le diagramme en camembert représente plus précisément le pourcentage de prédiction de chaque classe, vu que l'apprentissage s'est effectué sur un dataset balancé, nous remarquons que les prédictions respectent 
+<img src="images/predictions_pieplot.PNG" width="512"/>
+<img src="images/confiance_globale.PNG" width="512"/>
+
+<img src="images/distribution_proba.PNG" width="512"/>
+<img src="images/temps_execution.PNG" width="512"/>
+
 <h3>Références</h3>
+
 <ul>
   <li>http://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html</li>
   <li>https://www.unb.ca/cic/datasets/ids-2017.html</li>
