@@ -11,6 +11,11 @@ Tout d'abord, on commence par l'extraction des données depuis plusieurs sources
 </ul>
 Les données sont stockées au niveau du système de gestion des fichiers S3 au niveau de l'infrastructure cloud de AWS.<br>
 Ensuite, on procède au traitement des données au niveau du datawarehouse Redshift afin de centraliser les données et créer le dataset final qui va servir à l'apprentissage.
+Au final, on obtient un jeu de données balancé avec deux classes de trafic: (0: bénin) et (1: malveillant), ceci va permettre au modèle de bien apprendre à classifier les deux classes et de réduire le biais et le sur-apprentissage qui pourrait conduire à des prédictions fausses.<br>
+
+
+<img src="images/balanced_dataset.PNG" width="512"/>
+
 <h2>Etape 2: Apprentissage des modèles de classification binaire et évaluation</h2>
 Dans cette étape, on utilise le langage python pour entraîner les modèles de classification et ce en utilisant les packages: scikit-learn, pandas, numpy.
 <h3>2-1-Préparation du jeu de données</h3>
@@ -46,7 +51,13 @@ Entraînement des modèles de machine learning. <br>
   <li>Courbe ROC (évaluer le compromis entre le rappel et le taux de faux positifs)</li>
 </ul>
 <h3>2-4-Choix du meilleur modèle de prédiction</h3>
-Pour ce projet, le modèle Xgboost offre la meilleure prédiction sur le jeu de données.<br>
+Nous allons comparé le précision de chaque modèle de classification afin de choisir le meilleur classifier.<br>
+
+<img src="images/compare_models_acc.PNG" width="900"/>
+
+On remarque que le modèle Xgboost offre la meilleure prédiction sur le jeu de données.<br>
+
+
 <h3>2-5-Mesure de la performance du modèle et interprétation des résultats</h3>
 
 Dans ce qui suit, nous allons évaluer les performances du modèle choisi sur le jeu de données de validation sous forme de modélisations graphiques.<br>
