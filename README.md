@@ -1,7 +1,7 @@
 <h1>Système de détection des intrusions</h1>
-La détection des intrusions réseau et l'utilisation d'un modèle de classification binaire pour distinguer le trafic malveillant du trafic bénin offrent des avantages cruciaux pour les entreprises en matière de cybersécurité.<br>
-L'objectif de ce projet est de développer un système de classification binaire capable de détecter le trafic réseau malveillant ou bénin en analysant les données importantes telles que le protocole de communication, la durée, les ports de source et destination,etc.
-<h2>Etape 1: extraction, chargement et transformation des données sur AWS </h2>
+L'utilisation des modèles de classification binaire pour distinguer le trafic malveillant du trafic bénin au niveau du réseau offre des avantages importants pour les entreprises en matière de cybersécurité.<br>
+L'objectif de ce projet est de développer un système de classification binaire capable de détecter le trafic réseau malveillant ou bénin en analysant les données du réseau telles que le protocole de communication, la durée, les ports de source et destination, les nombres d'octets échangées, etc.
+<h2>Etape 1: extraction, chargement et transformation des données sur l'infrastructure cloud de AWS </h2>
 Tout d'abord, on commence par l'extraction des données depuis plusieurs sources: logs, datasets:
 <ul>
   <li>CICIDS 2018 </li>
@@ -11,7 +11,7 @@ Tout d'abord, on commence par l'extraction des données depuis plusieurs sources
 </ul>
 Les données sont stockées au niveau du système de gestion des fichiers S3 au niveau de l'infrastructure cloud de AWS.<br>
 Ensuite, on procède au traitement des données au niveau du datawarehouse Redshift afin de centraliser les données et créer le dataset final qui va servir à l'apprentissage.
-Au final, on obtient un jeu de données balancé avec deux classes de trafic: (0: bénin) et (1: malveillant), ceci va permettre au modèle de bien apprendre à classifier les deux classes et de réduire le biais et le sur-apprentissage qui pourrait conduire à des prédictions fausses.<br>
+Au final, on obtient un jeu de données balancé avec deux types de trafic: (0: bénin) et (1: malveillant), ceci va permettre au modèle de bien apprendre à classifier les deux classes et de réduire le biais et le sur-apprentissage qui pourrait conduire à de fausses prédictions.<br>
 
 
 <img src="images/balanced_dataset.PNG" width="512"/>
@@ -19,7 +19,7 @@ Au final, on obtient un jeu de données balancé avec deux classes de trafic: (0
 <h2>Etape 2: Apprentissage des modèles de classification binaire et évaluation</h2>
 Dans cette étape, on utilise le langage python pour entraîner les modèles de classification et ce en utilisant les packages: scikit-learn, pandas, numpy.
 <h3>2-1-Préparation du jeu de données</h3>
-<ul>
+<ol>
   <li>Suppression des doublons</li>
   <li>Traitement des valeurs nulles et NAN</li>
   <li>Choix des features importants pour l'apprentissage</li>
@@ -29,27 +29,30 @@ Dans cette étape, on utilise le langage python pour entraîner les modèles de 
   <li>Création des échantillons équilibrés des classes binaires: bénigne, maligne</li>
   <li>Encodage des variables catégorielles</li>
   <li>Normalisation du dataset</li>
-</ul>
+</ol>
 <h3>2-2-Entraînement des modèles de classification</h3>
-Préparation des jeus de données: training, testing, validation.<br>
-CHoix des hyperparamètres en utilisant la méthode du grid search.<br>
-Entraînement des modèles de machine learning. <br>
-<ul>
+<ol>
+<li>Préparation des jeux de données: training, testing, validation.</li>
+<li>Choix des hyperparamètres en utilisant la méthode du grid search.</li>
+<li>Entraînement des modèles de machine learning. </li>
+  
+<ol>
   <li>Random forest</li>
   <li>Logistic regression</li>
   <li>XGboost</li>
   <li>SVM</li>
   <li>Gradient boosting classifier</li>
-  <li>MLP</li>
-</ul>
-<h3>2-3-Evaluation</h3>
-<ul>
+  <li>Réseau de neuronnes composé de deux couches</li>
+</ol>
+</ol>
+<h3>2-3-Evaluation des modèles de classification en utilisant les métriques: </h3>
+<ol>
   <li>Accuracy (précision globale)</li>
   <li>Precision (taux de vrais positifs parmi les prédictions positives)</li>
   <li>Recall (taux de détection des positifs réels)</li>
   <li>F1-Score (harmonisation entre précision et rappel)</li>
   <li>Courbe ROC (évaluer le compromis entre le rappel et le taux de faux positifs)</li>
-</ul>
+</ol>
 <h3>2-4-Choix du meilleur modèle de prédiction</h3>
 Nous allons comparé le précision de chaque modèle de classification afin de choisir le meilleur classifier.<br>
 
@@ -58,7 +61,7 @@ Nous allons comparé le précision de chaque modèle de classification afin de c
 On remarque que le modèle Xgboost offre la meilleure prédiction sur le jeu de données.<br>
 
 
-<h3>2-5-Mesure de la performance du modèle et interprétation des résultats</h3>
+<h3>2-5-Mesure de la performance du modèle choisi et interprétation des résultats</h3>
 
 Dans ce qui suit, nous allons évaluer les performances du modèle choisi sur le jeu de données de validation sous forme de modélisations graphiques.<br>
 Nous commençons par le calcul de la matrice de confusion qui va nous permettre de mesurer l'exactitude, précision et confiance du modèle à bien classifier le traffic et prédire la classe correspondante au traffic réseau. <br>
